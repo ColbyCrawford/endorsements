@@ -1,0 +1,8 @@
+@use 'sass:meta';
+
+@include meta.load-css('base/normalize');
+@include meta.load-css('base/reset');
+@include meta.load-css('base/index');
+@include meta.load-css('layouts/index');
+@include meta.load-css('modules/index');
+@include meta.load-css('utilities/index');

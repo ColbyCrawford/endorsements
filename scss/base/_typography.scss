@@ -1,0 +1,17 @@
+body {
+    --p-body-bg-color: hsl(216, 100%, 100%);
+    --p-text-color: hsl(0, 0%, 62%);
+
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    background-color: var(--p-body-bg-color);
+    color: var(--p-text-color);
+
+    &.dark-mode {
+        --p-body-bg-color: hsl(216, 6%, 15%);
+    }
+}
+
+h1 {
+    font-size: 100px;
+}
