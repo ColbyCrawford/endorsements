@@ -16,15 +16,16 @@
 
 body {
     --p-body-bg-color: hsl(var(--clr-neutral-10));
-    --p-text-color: hsl(var(--clr-neutral-100));
+    --p-body-text-color: hsl(var(--clr-neutral-100));
 
     font-family: var(--ff-primary);
-    font-weight: 700;
+    font-weight: var(--fw-regular);
     background-color: var(--p-body-bg-color);
-    color: var(--p-text-color);
+    color: var(--p-body-text-color);
 
     &.theme-dark {
         --p-body-bg-color: hsl(var(--clr-neutral-200));
+        --p-body-text-color: hsl(var(--clr-neutral-75));
     }
 }
 
@@ -35,10 +36,16 @@ h4,
 h5,
 h6 {
     font-family: var(--ff-secondary);
+    font-weight: var(--fw-bold);
     color: hsl(var(--clr-text-gray));
 }
 
 .h1 {
     font-size: var(--fs-04);   /* 24px */
     line-height: 1.1666;       /* 28px */
+}
+
+.h2 {
+    font-size: var(--fs-03);  /* 20px */
+    line-height: 1.4;         /* 28px */
 }

@@ -8,5 +8,37 @@
     @media #{$break4} { --container-max-width: 60rem; }     /*  960px  */
     @media #{$break5open} { --container-max-width: 75rem; } /*  1120px */
 
+    --border-radius-rg: 0.5rem;
     --border-radius-round: 100vw;
+}
+
+body {
+    padding-block-start: 2rem;
+}
+
+input[type="text"],
+textarea {
+    --p-input-bg-color: hsl(var(--clr-neutral-50));
+    --p-input-text-color: hsl(var(--clr-neutral-200));
+
+    background-color: var(--p-input-bg-color);
+    color: var(--p-input-text-color);
+    border-radius: var(--border-radius-rg);
+    padding: 1rem;
+
+    #{$theme-dark} & {
+        --p-input-bg-color: hsl(var(--clr-neutral-150));
+        --p-input-text-color: hsl(var(--clr-neutral-0));
+    }
+}
+
+*::placeholder {
+    --p-placeholder-color: hsl(var(--clr-neutral-100));
+    
+    color: var(--p-placeholder-color);
+    opacity: 1;
+
+    #{$theme-dark} & {
+        --p-placeholder-color: hsl(var(--clr-neutral-75));
+    }
 }

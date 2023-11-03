@@ -13,7 +13,7 @@
             <div class="u-flex u-space-btwn">
                 <div class="u-flex u-gap-12">
                     <img id="logo" src="/assets/images/logo-dark.svg" alt="Champions">
-                    <span class="h1 u-color-text-gray">We are the<br> Champions</span>
+                    <span class="h1 u-color-text-gray u-bold">We are the<br> Champions</span>
                 </div>
                 <label>
                     <input type="checkbox" id="theme-toggle" class="toggle" autocomplete="off">
@@ -23,11 +23,40 @@
     </header>
     
     <main>
-        <div class="l-container">
-            <h1 class="h1">Endorse A Friend</h1>
-        </div>
+        <section id="endorsements" aria-labelledby="endorsements-title">
+            <div class="l-container">
+                <h1 class="h1 u-m-b12">Endorse A Friend</h1>
+
+                <label for="endorse-input-msg" hidden="true">Endorsement</label>
+                <textarea id="endorse-input-msg" class="u-m-b12" placeholder="Write your endorsement here"></textarea>
+
+                <div class="u-flex u-gap-12 u-m-b12">
+                    <label for="endorse-input-from" hidden="true">From</label>
+                    <input type="text" id="endorse-input-from" placeholder="From">
+                    
+                    <label for="endorse-input-to" hidden="true">To</label>
+                    <input type="text" id="endorse-input-to" placeholder="To">
+                </div>
+
+                <button id="publish-btn" class="btn-primary u-m-b32">Publish</button>
+
+                <h2 class="h2 u-m-b16 u-text-align-center">Endorsments</h2>
+
+                <ul id="endorsements-list">
+                    <li class="card">
+                        <span class="u-color-text-gray u-bold u-inline-block u-m-b8">To Leanne</span>
+                        <p class="u-m-b12">Leanne! Thank you so much for helping me with the March accounting. Saved so much time because of you! 💜 Frode</p>
+                        <div class="u-flex u-space-btwn">
+                            <span class="u-color-text-gray u-bold">From Frode</span>
+                            <span class="like">❤ 4</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
     </main>
 
-    <script src="js/theme.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/endorse.js" type="module"></script>
 </body>
 </html>

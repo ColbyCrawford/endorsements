@@ -1,0 +1,8 @@
+@use '../abstracts' as *;
+
+.like {
+    --p-like-text-color: hsl(var(--clr-alert-100));
+
+    color: var(--p-like-text-color);
+    cursor: pointer;
+}

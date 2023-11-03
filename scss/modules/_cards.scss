@@ -1,0 +1,15 @@
+@use '../abstracts' as *;
+
+.card {
+    --p-card-bg-color: hsl(var(--clr-neutral-50));
+
+    background-color: var(--p-card-bg-color);
+    border-radius: var(--border-radius-rg);
+    padding: 1.5rem 1rem 1rem;
+
+    #{$theme-dark} & {
+        --p-card-bg-color: hsl(var(--clr-neutral-150));
+    }
+}
+
+
