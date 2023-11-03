@@ -1,0 +1,25 @@
+@use '../abstracts' as *;
+
+:root {
+    /* neutrals */
+    --clr-neutral-hue: 216;
+
+    --clr-neutral-0: 0, 0%, 100%;
+    --clr-neutral-10: var(--clr-neutral-hue), 2%, 90%;
+    --clr-neutral-50: var(--clr-neutral-hue), 1%, 77%;
+    --clr-neutral-100: var(--clr-neutral-hue), 1%, 46%;
+    --clr-neutral-150: var(--clr-neutral-hue), 8%, 25%;
+    --clr-neutral-200: var(--clr-neutral-hue), 6%, 15%;
+
+    /* primary */
+    --clr-primary-hue: 216;
+    
+    --clr-primary-100: var(--clr-primary-hue), 73%, 44%;
+
+    /* text */
+    --clr-text-gray: var(--clr-neutral-200);
+
+    & #{$theme-dark} {
+        --clr-text-gray: var(--clr-neutral-0);
+    }
+}

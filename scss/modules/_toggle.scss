@@ -1,0 +1,32 @@
+@use '../abstracts' as *;
+
+.toggle {
+    --p-toggle-bg-color: hsl(var(--clr-neutral-100));
+
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding-inline: 0.125rem;
+    block-size: 1.5rem;
+    inline-size: 2.5rem;
+    background-color: var(--p-toggle-bg-color);
+    border-radius: var(--border-radius-round);
+    cursor: pointer;
+}
+
+.toggle::before {
+    --p-switch-bg-color: hsl(var(--clr-neutral-0));
+
+    content: '';
+    background-color: var(--p-switch-bg-color);
+    position: absolute;
+    block-size: 1.25rem;
+    inline-size: 1.25rem;
+    border-radius: var(--border-radius-round);
+}
+
+.toggle:checked {
+    --p-toggle-bg-color: hsl(var(--clr-primary-100));
+
+    justify-content: flex-end;
+}

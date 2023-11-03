@@ -418,6 +418,26 @@ meter {
   all: revert;
 }
 
+:root {
+  /* neutrals */
+  --clr-neutral-hue: 216;
+  --clr-neutral-0: 0, 0%, 100%;
+  --clr-neutral-10: var(--clr-neutral-hue), 2%, 90%;
+  --clr-neutral-50: var(--clr-neutral-hue), 1%, 77%;
+  --clr-neutral-100: var(--clr-neutral-hue), 1%, 46%;
+  --clr-neutral-150: var(--clr-neutral-hue), 8%, 25%;
+  --clr-neutral-200: var(--clr-neutral-hue), 6%, 15%;
+  /* primary */
+  --clr-primary-hue: 216;
+  --clr-primary-100: var(--clr-primary-hue), 73%, 44%;
+  /* text */
+  --clr-text-gray: var(--clr-neutral-200);
+}
+
+:root .theme-dark {
+  --clr-text-gray: var(--clr-neutral-0);
+}
+
 /* Primary Font */
 @font-face {
   font-family: "Inter";
@@ -434,19 +454,126 @@ meter {
   src: url("/assets/fonts/Inter-VariableFont_slnt,wght.ttf");
   font-weight: 700;
 }
+:root {
+  --ff-primary: "Inter", sans-serif;
+  --ff-secondary: var(--ff-secondary);
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+  --fs-01: 0.9375rem; /* 15px */
+  --fs-02: 1.125rem; /* 18px */
+  --fs-03: 1.25rem; /* 20px */
+  --fs-04: 1.5rem; /* 24px */
+}
+
 body {
-  --p-body-bg-color: hsl(216, 100%, 100%);
-  --p-text-color: hsl(0, 0%, 62%);
-  font-family: "Inter", sans-serif;
+  --p-body-bg-color: hsl(var(--clr-neutral-10));
+  --p-text-color: hsl(var(--clr-neutral-100));
+  font-family: var(--ff-primary);
   font-weight: 700;
   background-color: var(--p-body-bg-color);
   color: var(--p-text-color);
 }
 
-body.dark-mode {
-  --p-body-bg-color: hsl(216, 6%, 15%);
+body.theme-dark {
+  --p-body-bg-color: hsl(var(--clr-neutral-200));
 }
 
-h1 {
-  font-size: 100px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ff-secondary);
+  color: hsl(var(--clr-text-gray));
+}
+
+.h1 {
+  font-size: var(--fs-04); /* 24px */
+  line-height: 1.1666; /* 28px */
+}
+
+:root {
+  --container-max-width: 100%;
+  /*  540px  */
+  /*  720px  */
+  /*  960px  */
+  /*  1120px */
+  --border-radius-round: 100vw;
+}
+
+@media only screen and (min-width: 567px) and (max-width: 767.99px) {
+  :root {
+    --container-max-width: 33.75rem;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991.99px) {
+  :root {
+    --container-max-width: 45rem;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1168.99px) {
+  :root {
+    --container-max-width: 60rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  :root {
+    --container-max-width: 75rem;
+  }
+}
+.l-container {
+  inline-size: 100%;
+  margin-inline: auto;
+  padding-inline: 0.9375rem;
+  max-inline-size: var(--container-max-width);
+}
+
+#header {
+  padding-block: 2rem;
+}
+
+.toggle {
+  --p-toggle-bg-color: hsl(var(--clr-neutral-100));
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-inline: 0.125rem;
+  block-size: 1.5rem;
+  inline-size: 2.5rem;
+  background-color: var(--p-toggle-bg-color);
+  border-radius: var(--border-radius-round);
+  cursor: pointer;
+}
+
+.toggle::before {
+  --p-switch-bg-color: hsl(var(--clr-neutral-0));
+  content: "";
+  background-color: var(--p-switch-bg-color);
+  position: absolute;
+  block-size: 1.25rem;
+  inline-size: 1.25rem;
+  border-radius: var(--border-radius-round);
+}
+
+.toggle:checked {
+  --p-toggle-bg-color: hsl(var(--clr-primary-100));
+  justify-content: flex-end;
+}
+
+.u-flex {
+  display: flex !important;
+}
+
+.u-space-btwn {
+  justify-content: space-between !important;
+}
+
+.u-gap-12 {
+  gap: 0.75rem !important;
+}
+
+.u-color-text-gray {
+  color: hsl(var(--clr-text-gray)) !important;
 }/*# sourceMappingURL=style.css.map */
