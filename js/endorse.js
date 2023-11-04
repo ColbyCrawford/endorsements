@@ -1,5 +1,5 @@
 import { initializeApp } from  'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js'
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"
+import { getDatabase, ref, push, onValue, set } from "https://www.gstatic.com/firebasejs/10.5.2/firebase-database.js"
 
 const appConfig = {
     databaseURL: "https://endorsement-scrimba-project-default-rtdb.firebaseio.com/"
@@ -18,6 +18,7 @@ onValue(endorsementsInDB, function(snapshot) {
     
         for (let i = 0; i < itemsArray.length; i++) {
             let endorsementEntry = Object.values(itemsArray[i])
+            let endorsementKey = endorsementEntry[0]
             let endorsementData = endorsementEntry[1]
             let from = endorsementData.from
             let msg = endorsementData.msg
@@ -25,8 +26,9 @@ onValue(endorsementsInDB, function(snapshot) {
             let likes = endorsementData.likes
     
             let endorsement = new Endorsement(msg, to, from, likes)
-    
-            endorsementsList.appendChild(endorsement.element)
+            let endorsementEl = createEndorsmentEl(endorsementKey, endorsement)
+
+            endorsementsList.appendChild(endorsementEl)
         }
     }
 })
@@ -36,10 +38,9 @@ function Endorsement(msg, to, from, likes) {
     this.to = to
     this.from = from
     this.likes = likes
-    this.element = createEndorsmentEl(this)
 }
 
-function createEndorsmentEl(endorsement) {
+function createEndorsmentEl(key, endorsement) {
     let endorsementEl = document.createElement("li")
     let msgEl = document.createElement("p")
     let toEl = document.createElement("span")
@@ -53,10 +54,21 @@ function createEndorsmentEl(endorsement) {
     divEl.appendChild(fromEl)
     divEl.appendChild(likesEl)
 
-    msgEl.textContent = endorsement.msg;
-    toEl.textContent = `To ${endorsement.to}`;
-    fromEl.textContent = `From ${endorsement.from}`;
-    likesEl.textContent = `❤ ${endorsement.likes}`;
+    msgEl.textContent = endorsement.msg
+    toEl.textContent = `To ${endorsement.to}`
+    fromEl.textContent = `From ${endorsement.from}`
+    likesEl.textContent = `❤ ${endorsement.likes}`
+
+    likesEl.addEventListener("click", function() {
+        let numOfLikes = parseInt(endorsement.likes)
+        numOfLikes += 1;
+        endorsement.likes = numOfLikes.toString()
+        likesEl.textContent = `❤ ${endorsement.likes}`
+
+        let likesInDB = ref(database, `Endorsements/${key}/likes`)
+
+        set(likesInDB, endorsement.likes)
+    })
 
     endorsementEl.classList.add("card")
     toEl.classList.add("u-color-text-gray", "u-bold", "u-inline-block", "u-m-b8")
@@ -71,17 +83,22 @@ function createEndorsmentEl(endorsement) {
 const publishBtn = document.getElementById("publish-btn")
 
 publishBtn.addEventListener("click", function() {
-    let to = document.getElementById("endorse-input-to").value
-    let msg = document.getElementById("endorse-input-msg").value
-    let from = document.getElementById("endorse-input-from").value
+    let toInput = document.getElementById("endorse-input-to")
+    let msgInput = document.getElementById("endorse-input-msg")
+    let fromInput = document.getElementById("endorse-input-from")
 
-    if (to && msg && from) {
-        let endorsement = new Endorsement(msg, to, from, "0")
+    if (toInput.value && msgInput.value && fromInput.value) {
+        let endorsement = new Endorsement(msgInput.value, toInput.value, fromInput.value, "0")
 
         addEndorsementToDB(endorsement)
+
+        toInput.value = ""
+        msgInput.value = ""
+        fromInput.value = ""
     } else {
-        alert("fill out all the input fields")
+        alert ("Please fill out all input fields to continue")
     }
+
 })
 
 function addEndorsementToDB(endorsement) {

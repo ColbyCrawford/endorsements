@@ -16,5 +16,11 @@
             "to": "Emma",
             "from": "William",
             "likes": "12"
-    }
+        },
+    "04": {
+            "msg": "Your hired! Please attend your orientation. All details are provided in email sent to your mailbox. Thank you!",
+            "to": "Colby",
+            "from": "Ryan",
+            "likes": "0"
+        }
 }

@@ -587,7 +587,8 @@ textarea {
 }
 
 #endorsements-list {
-  display: grid;
+  display: flex;
+  flex-direction: column-reverse;
   gap: 1rem;
 }
 
@@ -669,6 +670,9 @@ textarea {
   --p-like-text-color: hsl(var(--clr-alert-100));
   color: var(--p-like-text-color);
   cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
 }
 
 .u-flex {
