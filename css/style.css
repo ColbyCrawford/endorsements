@@ -586,6 +586,11 @@ textarea {
   margin-block-end: 3.5rem;
 }
 
+#endorsements-list {
+  display: grid;
+  gap: 1rem;
+}
+
 #endorse-input-msg {
   inline-size: 100%;
   block-size: 7.5rem;
@@ -660,7 +665,7 @@ textarea {
   color: var(--p-btn-text-color);
 }
 
-.like {
+.likes {
   --p-like-text-color: hsl(var(--clr-alert-100));
   color: var(--p-like-text-color);
   cursor: pointer;

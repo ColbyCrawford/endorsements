@@ -8,33 +8,86 @@ const appConfig = {
 const app = initializeApp(appConfig)
 const database = getDatabase(app)
 const endorsementsInDB = ref(database, "Endorsements")
+const endorsementsList = document.getElementById("endorsements-list")
 
 onValue(endorsementsInDB, function(snapshot) {
-    let itemsArray = Object.entries(snapshot.val())
+    if (snapshot.exists()) {
+        let itemsArray = Object.entries(snapshot.val())
 
-    let endorsementsList = document.getElementById("endorsements-list")
-
-    for (let i = 0; i < itemsArray.length; i++) {
-        let endorsementEntry = Object.values(itemsArray[i])
-        let endorsementObject = endorsementEntry[1]
-
-        endorsementsList.appendChild += createEndorsmentEl()
+        clearEndorsementsList()
+    
+        for (let i = 0; i < itemsArray.length; i++) {
+            let endorsementEntry = Object.values(itemsArray[i])
+            let endorsementData = endorsementEntry[1]
+            let from = endorsementData.from
+            let msg = endorsementData.msg
+            let to = endorsementData.to
+            let likes = endorsementData.likes
+    
+            let endorsement = new Endorsement(msg, to, from, likes)
+    
+            endorsementsList.appendChild(endorsement.element)
+        }
     }
 })
 
-function Endorsement(msg, to, from) {
+function Endorsement(msg, to, from, likes) {
     this.msg = msg
     this.to = to
     this.from = from
+    this.likes = likes
+    this.element = createEndorsmentEl(this)
 }
 
-function createEndorsmentEl() {
-    let el = document.createElement("li")
-    el.textContent = "lol"
+function createEndorsmentEl(endorsement) {
+    let endorsementEl = document.createElement("li")
+    let msgEl = document.createElement("p")
+    let toEl = document.createElement("span")
+    let divEl = document.createElement("div")
+    let fromEl = document.createElement("span")
+    let likesEl = document.createElement("span")
 
-    return el
+    endorsementEl.appendChild(toEl)
+    endorsementEl.appendChild(msgEl)
+    endorsementEl.appendChild(divEl)
+    divEl.appendChild(fromEl)
+    divEl.appendChild(likesEl)
+
+    msgEl.textContent = endorsement.msg;
+    toEl.textContent = `To ${endorsement.to}`;
+    fromEl.textContent = `From ${endorsement.from}`;
+    likesEl.textContent = `❤ ${endorsement.likes}`;
+
+    endorsementEl.classList.add("card")
+    toEl.classList.add("u-color-text-gray", "u-bold", "u-inline-block", "u-m-b8")
+    msgEl.classList.add("u-m-b12")
+    divEl.classList.add("u-flex", "u-space-btwn")
+    likesEl.classList.add("likes")
+    fromEl.classList.add("u-color-text-gray", "u-bold")
+
+    return endorsementEl
 }
 
-// let endorsementOne = new Endorsement("Life is awesome!", "Colby", "Chase")
+const publishBtn = document.getElementById("publish-btn")
 
-// console.log(endorsementOne)
+publishBtn.addEventListener("click", function() {
+    let to = document.getElementById("endorse-input-to").value
+    let msg = document.getElementById("endorse-input-msg").value
+    let from = document.getElementById("endorse-input-from").value
+
+    if (to && msg && from) {
+        let endorsement = new Endorsement(msg, to, from, "0")
+
+        addEndorsementToDB(endorsement)
+    } else {
+        alert("fill out all the input fields")
+    }
+})
+
+function addEndorsementToDB(endorsement) {
+    push(endorsementsInDB, endorsement)
+}
+
+function clearEndorsementsList() {
+    endorsementsList.innerHTML = ""
+}

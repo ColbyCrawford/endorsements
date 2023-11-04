@@ -1,6 +1,6 @@
 @use '../abstracts' as *;
 
-.like {
+.likes {
     --p-like-text-color: hsl(var(--clr-alert-100));
 
     color: var(--p-like-text-color);
